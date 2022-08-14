@@ -20,25 +20,35 @@
     var CONFIG = {"hostname":"dazzawoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="變數  根據在維基百科上的解釋得知：可以指定任意的值給變數，也可以單純建立一個變數不指派任何的值。  為什麼要使用變數呢？舉例來說在一個班級中，在新學期開始時老師都必須透過名字和座號來認識所有的同學，所以往後在唸名字時就可以知道是在叫誰。假如沒有這些資訊，每當點名時都要點第幾排第幾個，會相當的麻煩呢。">
+  <meta name="description" content="什麼是終端機一般來說我們在作業系統裡操作都為GUI(圖形使用者介面)，對於新使用者而言，降低使用者的操作負擔之外，圖形介面對於使用者來說在視覺上更易於接受，學習成本大幅下降。而另一種操作模式是使用CLI(命令列介面)，a.k.a CUI(文字使用者介面)，透過此介面輸入指令，電腦接受後再執行指令。來源維基百科 終端機常用指令在終端機介面操作經常使用的指令介紹：    MacOS&#x2F;Linu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="變數與常數">
-<meta property="og:url" content="http://dazzawoo.github.io/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/index.html">
+<meta property="og:title" content="Command Line">
+<meta property="og:url" content="http://dazzawoo.github.io/2022/08/14/Command-Line/index.html">
 <meta property="og:site_name" content="Daz&#39;s Tech blog">
-<meta property="og:description" content="變數  根據在維基百科上的解釋得知：可以指定任意的值給變數，也可以單純建立一個變數不指派任何的值。  為什麼要使用變數呢？舉例來說在一個班級中，在新學期開始時老師都必須透過名字和座號來認識所有的同學，所以往後在唸名字時就可以知道是在叫誰。假如沒有這些資訊，每當點名時都要點第幾排第幾個，會相當的麻煩呢。">
+<meta property="og:description" content="什麼是終端機一般來說我們在作業系統裡操作都為GUI(圖形使用者介面)，對於新使用者而言，降低使用者的操作負擔之外，圖形介面對於使用者來說在視覺上更易於接受，學習成本大幅下降。而另一種操作模式是使用CLI(命令列介面)，a.k.a CUI(文字使用者介面)，透過此介面輸入指令，電腦接受後再執行指令。來源維基百科 終端機常用指令在終端機介面操作經常使用的指令介紹：    MacOS&#x2F;Linu">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://i.imgur.com/QhJzm1F.png">
-<meta property="og:image" content="https://i.imgur.com/2O2WWS4.png">
-<meta property="og:image" content="https://i.imgur.com/XIQhAAB.png">
-<meta property="article:published_time" content="2022-08-14T02:49:39.000Z">
-<meta property="article:modified_time" content="2022-08-14T02:57:41.675Z">
+<meta property="og:image" content="https://i.imgur.com/hQVnqe4.png">
+<meta property="og:image" content="https://i.imgur.com/nZygKqR.png">
+<meta property="og:image" content="https://i.imgur.com/XWPokef.png">
+<meta property="og:image" content="https://i.imgur.com/8wbSXha.png">
+<meta property="og:image" content="https://i.imgur.com/W1XdQqh.png">
+<meta property="og:image" content="https://i.imgur.com/qykyTi1.png">
+<meta property="og:image" content="https://i.imgur.com/XNbe9tH.png">
+<meta property="og:image" content="https://i.imgur.com/rkqpkwN.png">
+<meta property="og:image" content="https://i.imgur.com/SjOBAJt.png">
+<meta property="og:image" content="https://i.imgur.com/Hoo5lGw.png">
+<meta property="og:image" content="https://i.imgur.com/zgB1msI.png">
+<meta property="og:image" content="https://i.imgur.com/99AxEH2.png">
+<meta property="og:image" content="https://i.imgur.com/502ACTK.png">
+<meta property="article:published_time" content="2022-08-14T04:32:34.000Z">
+<meta property="article:modified_time" content="2022-08-14T04:42:27.395Z">
 <meta property="article:author" content="Daz">
-<meta property="article:tag" content="Ruby">
-<meta property="article:tag" content="學習筆記">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="Terminal">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/QhJzm1F.png">
+<meta name="twitter:image" content="https://i.imgur.com/hQVnqe4.png">
 
-<link rel="canonical" href="http://dazzawoo.github.io/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/">
+<link rel="canonical" href="http://dazzawoo.github.io/2022/08/14/Command-Line/">
 
 
 <script id="page-configurations">
@@ -51,7 +61,7 @@
   };
 </script>
 
-  <title>變數與常數 | Daz's Tech blog</title>
+  <title>Command Line | Daz's Tech blog</title>
   
 
 
@@ -167,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://dazzawoo.github.io/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/">
+    <link itemprop="mainEntityOfPage" href="http://dazzawoo.github.io/2022/08/14/Command-Line/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://i.imgur.com/jgVAJFq.jpg">
@@ -180,7 +190,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          變數與常數
+          Command Line
         </h1>
 
         <div class="post-meta">
@@ -191,7 +201,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-08-14 10:49:39 / 修改時間：10:57:41" itemprop="dateCreated datePublished" datetime="2022-08-14T10:49:39+08:00">2022-08-14</time>
+              <time title="創建時間：2022-08-14 12:32:34 / 修改時間：12:42:27" itemprop="dateCreated datePublished" datetime="2022-08-14T12:32:34+08:00">2022-08-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -199,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+                  <a href="/categories/Terminal/" itemprop="url" rel="index"><span itemprop="name">Terminal</span></a>
                 </span>
             </span>
 
@@ -214,58 +224,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="變數"><a href="#變數" class="headerlink" title="變數"></a><strong>變數</strong></h2><p><img src="https://i.imgur.com/QhJzm1F.png"></p>
-<ul>
-<li>根據在維基百科上的解釋得知：可以指定任意的值給變數，也可以單純建立一個變數不指派任何的值。</li>
-</ul>
-<h3 id="為什麼要使用變數呢？"><a href="#為什麼要使用變數呢？" class="headerlink" title="為什麼要使用變數呢？"></a>為什麼要使用變數呢？</h3><p>舉例來說在一個班級中，在新學期開始時老師都必須透過名字和座號來認識所有的同學，所以往後在唸名字時就可以知道是在叫誰。假如沒有這些資訊，每當點名時都要點第幾排第幾個，會相當的麻煩呢。</p>
+        <h2 id="什麼是終端機"><a href="#什麼是終端機" class="headerlink" title="什麼是終端機"></a>什麼是終端機</h2><p>一般來說我們在作業系統裡操作都為GUI(圖形使用者介面)，對於新使用者而言，降低使用者的操作負擔之外，圖形介面對於使用者來說在視覺上更易於接受，學習成本大幅下降。而另一種操作模式是使用CLI(命令列介面)，a.k.a CUI(文字使用者介面)，透過此介面輸入指令，電腦接受後再執行指令。<br>來源<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2">維基百科</a></p>
+<h2 id="終端機常用指令"><a href="#終端機常用指令" class="headerlink" title="終端機常用指令"></a>終端機常用指令</h2><p>在終端機介面操作經常使用的指令介紹：</p>
+<table>
+<thead>
+<tr>
+<th>MacOS&#x2F;Linux 指令</th>
+<th>代表意思</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pwd</td>
+<td>目前所在位置</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>當前資料夾裡所有的檔案</td>
+</tr>
+<tr>
+<td>cd [路徑]</td>
+<td>切換目錄 [路徑]</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>新增資料夾</td>
+</tr>
+<tr>
+<td>touch</td>
+<td>新增檔案</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>複製檔案</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>移動檔案</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>刪除</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>清除畫面上內容</td>
+</tr>
+</tbody></table>
 <span id="more"></span>
 
-<p>而在程式世界中建立變數可以讓我們反覆使用這些資訊。</p>
-<p>舉例來說我們可以命名一個變數，名稱為 apple，在將一個值<mark><strong>指定</strong>(&#x3D; 為指定的意思)</mark>給 apple。在 Ruby 裡可以寫成：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apple_price = <span class="number">30</span></span><br></pre></td></tr></table></figure>
-
-<p>假設今天在水果攤買了3蘋果，我們可以拿剛剛命名好的 <mark>apple_price</mark> 變數 以及另外再建立一個 <mark>total</mark> 變數來記錄總金額如：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">total = apple_price * <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>常見的命名方式為：</p>
-<ol>
-<li>駝峰式命名(camelCase)：userName </li>
-<li>蛇式命名(snake_case)： user_name</li>
-</ol>
-<blockquote><ul>
-<li>蛇式命名是使用 ruby 時常見的一種命名方式。</li>
-<li>在 Ruby 裡不能使用<mark>數字</mark>作為開頭。</li>
-</ul>
-</blockquote>
-
-<p>Ruby程式語言中，變數可分為四種：</p>
-<ol>
-<li>區域變數</li>
-<li>全域變數</li>
-<li>實體變數</li>
-<li>類別變數</li>
-</ol>
-<p><img src="https://i.imgur.com/2O2WWS4.png"></p>
-<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a><strong>常數</strong></h2><p><img src="https://i.imgur.com/XIQhAAB.png"></p>
-<ul>
-<li>由維基百科得知：常數的數值須為固定且不變的。</li>
-</ul>
-<p>在 Ruby 裡常數的命名通常為英文字母大寫開頭</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User = <span class="string">&quot;Daniel&quot;</span></span><br><span class="line"><span class="variable constant_">BOOK</span> = <span class="string">&quot;Ruby on Rails&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="變數與常數的差異"><a href="#變數與常數的差異" class="headerlink" title="變數與常數的差異"></a>變數與常數的差異</h3><ul>
-<li>不同處： <ul>
-<li>變數為英文字母小寫開頭。</li>
-<li>常數為英文字母大寫開頭。</li>
-</ul>
-</li>
-<li>相同處：<ul>
-<li>在 Ruby 裡變數與常數都可以被修改。(跟其他程式語言最大的不同之處)</li>
-</ul>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/05-ruby-basic-1#variable-and-constant">參考來源: 為你自己學 Ruby on Rails</a></p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p>當前所在位置為：Users&#x2F;uncledrew<br><img src="https://i.imgur.com/hQVnqe4.png"></p>
+<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>查看當前位置下的所有檔案<br><img src="https://i.imgur.com/nZygKqR.png"></p>
+<p>ls -al: 包含檔案建立的時期與時間<br><img src="https://i.imgur.com/XWPokef.png"></p>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>移動到 documents 資料夾<br><img src="https://i.imgur.com/8wbSXha.png"></p>
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p>建立 tmp 資料夾<br><img src="https://i.imgur.com/W1XdQqh.png"></p>
+<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>要先移動到 tmp 資料夾，再建立 index.html 檔案<br><img src="https://i.imgur.com/qykyTi1.png"></p>
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p>從 index.html 複製一份檔名為 01.html<br><img src="https://i.imgur.com/XNbe9tH.png"></p>
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>先在 tmp 資料夾中建立01、02資料夾<br><img src="https://i.imgur.com/rkqpkwN.png"></p>
+<p>分別在01及02資料夾中建立檔案<br><img src="https://i.imgur.com/SjOBAJt.png"></p>
+<p>將02.html移動到01資料夾中<br><img src="https://i.imgur.com/Hoo5lGw.png"></p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>刪除 index.html<br><img src="https://i.imgur.com/zgB1msI.png"></p>
+<p>rm -r tmp: 刪除 tmp 資料夾，刪除資料夾指令需要多 + -r<br><img src="https://i.imgur.com/99AxEH2.png"></p>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p>清除畫面內容<br><img src="https://i.imgur.com/502ACTK.png"></p>
 
     </div>
 
@@ -275,8 +294,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
-              <a href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag"># 學習筆記</a>
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/Terminal/" rel="tag"># Terminal</a>
           </div>
 
         
@@ -285,13 +304,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/08/14/Rails-%E4%B8%80%E5%B0%8D%E4%B8%80%E9%97%9C%E8%81%AF%E6%80%A7/" rel="prev" title="Rails 一對一關聯性">
-      <i class="fa fa-chevron-left"></i> Rails 一對一關聯性
+    <a href="/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/" rel="prev" title="變數與常數">
+      <i class="fa fa-chevron-left"></i> 變數與常數
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/08/14/Command-Line/" rel="next" title="Command Line">
-      Command Line <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -350,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8"><span class="nav-number">1.</span> <span class="nav-text">變數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%8A%E6%95%B8%E5%91%A2%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">為什麼要使用變數呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E6%95%B8"><span class="nav-number">2.</span> <span class="nav-text">常數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">變數與常數的差異</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E7%B5%82%E7%AB%AF%E6%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是終端機</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%82%E7%AB%AF%E6%A9%9F%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">終端機常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd"><span class="nav-number">2.1.</span> <span class="nav-text">pwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls"><span class="nav-number">2.2.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd"><span class="nav-number">2.3.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mkdir"><span class="nav-number">2.4.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#touch"><span class="nav-number">2.5.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp"><span class="nav-number">2.6.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv"><span class="nav-number">2.7.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm"><span class="nav-number">2.8.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear"><span class="nav-number">2.9.</span> <span class="nav-text">clear</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
