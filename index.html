@@ -258,10 +258,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2022-08-13 22:17:31 / 修改時間：22:34:42" itemprop="dateCreated datePublished" datetime="2022-08-13T22:17:31+08:00">2022-08-13</time>
+              <time title="創建時間：2022-08-13 22:17:31" itemprop="dateCreated datePublished" datetime="2022-08-13T22:17:31+08:00">2022-08-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-08-14 10:16:51" itemprop="dateModified" datetime="2022-08-14T10:16:51+08:00">2022-08-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -284,48 +290,14 @@
 
       
           <h1 id="使用者認證-Authentication"><a href="#使用者認證-Authentication" class="headerlink" title="使用者認證(Authentication)"></a>使用者認證(Authentication)</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>對於初學者來說，註冊、登入與登出功能比起一般的CRUD功能來說更為複雜，需要對於整體的流程有一定程度的了解，但是除了自己手刻以外，在 RubyGems 有個好用的套件叫 “devise” ，讓我們能輕鬆實現上述功能。</p>
-<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><ol>
-<li>先在專案中的 gemfile 加上 gem ‘devise’。隨意找一個地方加上即可。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Gemfile</span></span><br><span class="line">gem <span class="string">&#x27;devise&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li>存欓後再到 terminal 執行 bundle install<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install</span><br></pre></td></tr></table></figure></li>
-<li>執行下方指令<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails generate devise:install</span><br></pre></td></tr></table></figure>
-成功後會在 terminal 會出現確認項目。</li>
-</ol>
-<ul>
-<li>確認在 enviroment 檔案中有定義預設 root_url 選項。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># development.rb</span></span><br><span class="line">config.action_mailer.default_url_options = &#123; <span class="symbol">host:</span> <span class="string">&#x27;localhost&#x27;</span>, <span class="symbol">port:</span> <span class="number">3000</span> &#125;</span><br></pre></td></tr></table></figure></li>
-<li>確認在 routes 中有定義 root 對應的 action。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># routes.rb</span></span><br><span class="line">root <span class="symbol">to:</span> <span class="string">&quot;home#index&quot;</span></span><br></pre></td></tr></table></figure>
-設定完 routes 後，需要在建立 home_controller。<br>在 app&#x2F;controller 建立 home_controller<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># home_controller.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HomeController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-以及在 app&#x2F;views&#x2F; 建立 home 資料夾，並在此資料夾內建立 index.html.erb<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html.erb --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>確認在 app&#x2F;views&#x2F;layout&#x2F;application.html.erb 欓案中加入<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- application.html.erb --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;notice&quot;</span>&gt;</span>&lt;%= notice %&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;alert&quot;</span>&gt;</span>&lt;%= alert %&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>另外也可以複製一份 devise 的 views 去改寫預設的樣式。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails g devise:views</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ol start="4">
-<li><p>再來要產生 devise model(通常會是 User 或 Admin)，這次要建立使用者登入，採用文欓建議的 User。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails generate devise User</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接著將剛產生的 model 具現化</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails db:migrate</span><br></pre></td></tr></table></figure></li>
-<li><p>到這邊可以先在本地將 server 開啟看一下到目前的結果。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails server</span><br></pre></td></tr></table></figure>
-<p>到首頁可以成功顯示出畫面。<br><img src="https://i.imgur.com/6GePBY6.png"></p>
-</li>
-</ol>
-<p>接著再到 &#x2F;users&#x2F;sign_up 頁面。<br><img src="https://i.imgur.com/uSRUM9n.png"><br>需要的表單及 Sign up、Log in 都已經建立完成。</p>
-<p>驗證機制也都幫我們建立好了。<br><img src="https://i.imgur.com/WAx4uFu.png"></p>
-<p>假如今天是一個部落格網站，使用者可以擁有每篇文章新增、讀取、修改、刪除文章的功能，但是只能針對自己的文章擁有這些功能，不能隨意在他人的頁面下擁有新增、修改、刪除的可能，只能查看他人的文章。<br>這個時候可以透過 devise 套件所做好的 helpers 來幫助我們在 controler 跟 view 裡能使用到的功能。</p>
-<ol>
-<li>使用者認證</li>
-<li>確認使用者是否登入 </li>
-<li>目前的使用者</li>
-</ol>
-<p>透過以上 3 個 helpers 可以達成以上的需求。<br>首先在 application_controller + 上使用者認證：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application_controller</span></span><br><span class="line">before_action <span class="symbol">:authenticate_user!</span></span><br></pre></td></tr></table></figure>
-<p>加上後所有的功能需要使用者登入成功後才可以執行，但假如希望讀取文章可以在不用登入的情況下可以在文章的 controller 裡用 skip 的方式跳過著個認證。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># article_controller</span></span><br><span class="line">skip_before_action <span class="symbol">:authenticate_user!</span>, <span class="symbol">only:</span> [<span class="symbol">:show</span>]</span><br></pre></td></tr></table></figure>
-<p>另外要在 views 頁面上顯示目前的使用者資訊，可以在 application.html.erb 進行判斷。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- applicaiton.html.erb --&gt;</span></span><br><span class="line">&lt;% if user_signed_in? %&gt;</span><br><span class="line">  &lt;%= current_user.eamil %&gt;</span><br><span class="line">  &lt;%= link_to &quot;log out&quot;, destroy_user_session_path, method: &#x27;delete&#x27; %&gt;</span><br><span class="line">&lt;% else %&gt;</span><br><span class="line">  &lt;%= link_to &quot;sign in&quot;, new_user_session_path %&gt;</span><br><span class="line">  &lt;%= link_to &quot;sign up&quot;, new_user_registration_path %&gt;</span><br><span class="line">&lt;% end %&gt;</span><br></pre></td></tr></table></figure>
-<p>成功登入畫面：<br><img src="https://i.imgur.com/3w47xGG.png"></p>
-<p>更多資訊請參閱： <a target="_blank" rel="noopener" href="https://github.com/heartcombo/devise#getting-started/">devise</a>。 </p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/13/%E4%BD%BF%E7%94%A8%E8%80%85%E8%AA%8D%E8%AD%89-Authentication/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
