@@ -20,30 +20,38 @@
     var CONFIG = {"hostname":"dazzawoo.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Hello Tech World">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Daz&#39;s Tech blog">
-<meta property="og:url" content="http://dazzawoo.github.io/index.html">
+  <meta name="description" content="變數  根據在維基百科上的解釋得知：可以指定任意的值給變數，也可以單純建立一個變數不指派任何的值。  為什麼要使用變數呢？舉例來說在一個班級中，在新學期開始時老師都必須透過名字和座號來認識所有的同學，所以往後在唸名字時就可以知道是在叫誰。假如沒有這些資訊，每當點名時都要點第幾排第幾個，會相當的麻煩呢。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="變數與常數">
+<meta property="og:url" content="http://dazzawoo.github.io/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/index.html">
 <meta property="og:site_name" content="Daz&#39;s Tech blog">
-<meta property="og:description" content="Hello Tech World">
+<meta property="og:description" content="變數  根據在維基百科上的解釋得知：可以指定任意的值給變數，也可以單純建立一個變數不指派任何的值。  為什麼要使用變數呢？舉例來說在一個班級中，在新學期開始時老師都必須透過名字和座號來認識所有的同學，所以往後在唸名字時就可以知道是在叫誰。假如沒有這些資訊，每當點名時都要點第幾排第幾個，會相當的麻煩呢。">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/QhJzm1F.png">
+<meta property="og:image" content="https://i.imgur.com/2O2WWS4.png">
+<meta property="og:image" content="https://i.imgur.com/XIQhAAB.png">
+<meta property="article:published_time" content="2022-08-14T02:49:39.000Z">
+<meta property="article:modified_time" content="2022-08-14T02:57:41.675Z">
 <meta property="article:author" content="Daz">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="學習筆記">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/QhJzm1F.png">
 
-<link rel="canonical" href="http://dazzawoo.github.io/">
+<link rel="canonical" href="http://dazzawoo.github.io/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>Daz's Tech blog</title>
+  <title>變數與常數 | Daz's Tech blog</title>
   
 
 
@@ -152,9 +160,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
@@ -170,10 +179,9 @@
       <meta itemprop="name" content="Daz's Tech blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/" class="post-title-link" itemprop="url">變數與常數</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          變數與常數
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -206,192 +214,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="變數"><a href="#變數" class="headerlink" title="變數"></a><strong>變數</strong></h2><p><img src="https://i.imgur.com/QhJzm1F.png"></p>
+        <h2 id="變數"><a href="#變數" class="headerlink" title="變數"></a><strong>變數</strong></h2><p><img src="https://i.imgur.com/QhJzm1F.png"></p>
 <ul>
 <li>根據在維基百科上的解釋得知：可以指定任意的值給變數，也可以單純建立一個變數不指派任何的值。</li>
 </ul>
 <h3 id="為什麼要使用變數呢？"><a href="#為什麼要使用變數呢？" class="headerlink" title="為什麼要使用變數呢？"></a>為什麼要使用變數呢？</h3><p>舉例來說在一個班級中，在新學期開始時老師都必須透過名字和座號來認識所有的同學，所以往後在唸名字時就可以知道是在叫誰。假如沒有這些資訊，每當點名時都要點第幾排第幾個，會相當的麻煩呢。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/14/%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<span id="more"></span>
+
+<p>而在程式世界中建立變數可以讓我們反覆使用這些資訊。</p>
+<p>舉例來說我們可以命名一個變數，名稱為 apple，在將一個值<mark><strong>指定</strong>(&#x3D; 為指定的意思)</mark>給 apple。在 Ruby 裡可以寫成：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apple_price = <span class="number">30</span></span><br></pre></td></tr></table></figure>
+
+<p>假設今天在水果攤買了3蘋果，我們可以拿剛剛命名好的 <mark>apple_price</mark> 變數 以及另外再建立一個 <mark>total</mark> 變數來記錄總金額如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">total = apple_price * <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>常見的命名方式為：</p>
+<ol>
+<li>駝峰式命名(camelCase)：userName </li>
+<li>蛇式命名(snake_case)： user_name</li>
+</ol>
+<blockquote><ul>
+<li>蛇式命名是使用 ruby 時常見的一種命名方式。</li>
+<li>在 Ruby 裡不能使用<mark>數字</mark>作為開頭。</li>
+</ul>
+</blockquote>
+
+<p>Ruby程式語言中，變數可分為四種：</p>
+<ol>
+<li>區域變數</li>
+<li>全域變數</li>
+<li>實體變數</li>
+<li>類別變數</li>
+</ol>
+<p><img src="https://i.imgur.com/2O2WWS4.png"></p>
+<h2 id="常數"><a href="#常數" class="headerlink" title="常數"></a><strong>常數</strong></h2><p><img src="https://i.imgur.com/XIQhAAB.png"></p>
+<ul>
+<li>由維基百科得知：常數的數值須為固定且不變的。</li>
+</ul>
+<p>在 Ruby 裡常數的命名通常為英文字母大寫開頭</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User = <span class="string">&quot;Daniel&quot;</span></span><br><span class="line"><span class="variable constant_">BOOK</span> = <span class="string">&quot;Ruby on Rails&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="變數與常數的差異"><a href="#變數與常數的差異" class="headerlink" title="變數與常數的差異"></a>變數與常數的差異</h3><ul>
+<li>不同處： <ul>
+<li>變數為英文字母小寫開頭。</li>
+<li>常數為英文字母大寫開頭。</li>
+</ul>
+</li>
+<li>相同處：<ul>
+<li>在 Ruby 裡變數與常數都可以被修改。(跟其他程式語言最大的不同之處)</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/05-ruby-basic-1#variable-and-constant">參考來源: 為你自己學 Ruby on Rails</a></p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" rel="tag"># 學習筆記</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://dazzawoo.github.io/2022/08/14/Rails-%E4%B8%80%E5%B0%8D%E4%B8%80%E9%97%9C%E8%81%AF%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.imgur.com/jgVAJFq.jpg">
-      <meta itemprop="name" content="Daz">
-      <meta itemprop="description" content="Hello Tech World">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Daz's Tech blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/08/14/Rails-%E4%B8%80%E5%B0%8D%E4%B8%80%E9%97%9C%E8%81%AF%E6%80%A7/" class="post-title-link" itemprop="url">Rails 一對一關聯性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2022-08-14 07:21:29 / 修改時間：10:09:19" itemprop="dateCreated datePublished" datetime="2022-08-14T07:21:29+08:00">2022-08-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Rails/" itemprop="url" rel="index"><span itemprop="name">Rails</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Rails-Active-Record-Association"><a href="#Rails-Active-Record-Association" class="headerlink" title="Rails Active Record Association"></a>Rails Active Record Association</h1><h2 id="Model-之間的關聯性"><a href="#Model-之間的關聯性" class="headerlink" title="Model 之間的關聯性"></a>Model 之間的關聯性</h2><p>在資料庫的設計中，通常會有需多不同的表單去存放不同的資料，以電商來說，會有賣家、商品、使用者、訂單等等這些資訊。而透過 Model 之間的關聯性，能更輕鬆地去對資料庫中的表格進行操作。</p>
-<p>在 Rails 中就包含一對一、一對多及多對多這些關聯。以下為實作一對一的關聯性。</p>
-<p>一對一關聯: 假設今天有使用網站的使用者在網站中只能擁有一間商店，除此之外，同一位使用者再重複建立商店。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/14/Rails-%E4%B8%80%E5%B0%8D%E4%B8%80%E9%97%9C%E8%81%AF%E6%80%A7/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://dazzawoo.github.io/2022/08/13/%E4%BD%BF%E7%94%A8%E8%80%85%E8%AA%8D%E8%AD%89-Authentication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://i.imgur.com/jgVAJFq.jpg">
-      <meta itemprop="name" content="Daz">
-      <meta itemprop="description" content="Hello Tech World">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Daz's Tech blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/08/13/%E4%BD%BF%E7%94%A8%E8%80%85%E8%AA%8D%E8%AD%89-Authentication/" class="post-title-link" itemprop="url">使用者認證(Authentication)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2022-08-13 22:17:31" itemprop="dateCreated datePublished" datetime="2022-08-13T22:17:31+08:00">2022-08-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2022-08-14 10:20:25" itemprop="dateModified" datetime="2022-08-14T10:20:25+08:00">2022-08-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Rails/" itemprop="url" rel="index"><span itemprop="name">Rails</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="使用者認證-Authentication"><a href="#使用者認證-Authentication" class="headerlink" title="使用者認證(Authentication)"></a>使用者認證(Authentication)</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>對於初學者來說，註冊、登入與登出功能比起一般的CRUD功能來說更為複雜，需要對於整體的流程有一定程度的了解，但是除了自己手刻以外，在 RubyGems 有個好用的套件叫 “devise” ，讓我們能輕鬆實現上述功能。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/13/%E4%BD%BF%E7%94%A8%E8%80%85%E8%AA%8D%E8%AD%89-Authentication/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/14/Rails-%E4%B8%80%E5%B0%8D%E4%B8%80%E9%97%9C%E8%81%AF%E6%80%A7/" rel="prev" title="Rails 一對一關聯性">
+      <i class="fa fa-chevron-left"></i> Rails 一對一關聯性
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -444,6 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8"><span class="nav-number">1.</span> <span class="nav-text">變數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E4%BD%BF%E7%94%A8%E8%AE%8A%E6%95%B8%E5%91%A2%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">為什麼要使用變數呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E6%95%B8"><span class="nav-number">2.</span> <span class="nav-text">常數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E8%88%87%E5%B8%B8%E6%95%B8%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">變數與常數的差異</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
