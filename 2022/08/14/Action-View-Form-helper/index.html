@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"dazzawoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Action View - form helper在大多數的網站中時常可以見到表單填寫，如會員登入、購物車、google 表單，在 Rails 中也提供小幫手來完成表單的傳送。在 Rails 中目前常見為 form_for 和 form_with。Rails 7 目前最主要為 form_with 的用法。而這三種又有什麼區別呢？ form_for 處理 Model 實體form_for 會根據 M">
+  <meta name="description" content="Action View - form helper在大多數的網站中時常可以見到表單填寫，如會員登入、購物車、google 表單，在 Rails 中也提供小幫手來完成表單的傳送。在 Rails 中目前常見為 form_for 和 form_with。Rails 7 目前最主要為 form_with 的用法。而這三種又有什麼區別呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Action View - Form helper">
 <meta property="og:url" content="http://dazzawoo.github.io/2022/08/14/Action-View-Form-helper/index.html">
 <meta property="og:site_name" content="Daz&#39;s Tech blog">
-<meta property="og:description" content="Action View - form helper在大多數的網站中時常可以見到表單填寫，如會員登入、購物車、google 表單，在 Rails 中也提供小幫手來完成表單的傳送。在 Rails 中目前常見為 form_for 和 form_with。Rails 7 目前最主要為 form_with 的用法。而這三種又有什麼區別呢？ form_for 處理 Model 實體form_for 會根據 M">
+<meta property="og:description" content="Action View - form helper在大多數的網站中時常可以見到表單填寫，如會員登入、購物車、google 表單，在 Rails 中也提供小幫手來完成表單的傳送。在 Rails 中目前常見為 form_for 和 form_with。Rails 7 目前最主要為 form_with 的用法。而這三種又有什麼區別呢？">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-08-14T12:15:22.000Z">
-<meta property="article:modified_time" content="2022-08-14T12:19:27.868Z">
+<meta property="article:modified_time" content="2022-08-14T12:29:54.537Z">
 <meta property="article:author" content="Daz">
 <meta property="article:tag" content="Rails">
 <meta name="twitter:card" content="summary">
@@ -186,7 +186,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-08-14 20:15:22 / 修改時間：20:19:27" itemprop="dateCreated datePublished" datetime="2022-08-14T20:15:22+08:00">2022-08-14</time>
+              <time title="創建時間：2022-08-14 20:15:22 / 修改時間：20:29:54" itemprop="dateCreated datePublished" datetime="2022-08-14T20:15:22+08:00">2022-08-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,6 +210,7 @@
 
       
         <h1 id="Action-View-form-helper"><a href="#Action-View-form-helper" class="headerlink" title="Action View - form helper"></a>Action View - form helper</h1><p>在大多數的網站中時常可以見到表單填寫，如會員登入、購物車、google 表單，在 Rails 中也提供小幫手來完成表單的傳送。<br>在 Rails 中目前常見為 form_for 和 form_with。Rails 7 目前最主要為 form_with 的用法。而這三種又有什麼區別呢？</p>
+<span id="more"></span>
 <h2 id="form-for-處理-Model-實體"><a href="#form-for-處理-Model-實體" class="headerlink" title="form_for 處理 Model 實體"></a>form_for 處理 Model 實體</h2><p>form_for 會根據 Model 按慣例去找到對應的路徑，而且送出後也會判斷出現在要新增還是更新資料。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= form_for(article) do |f| %&gt;</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    &lt;%= f.label :title %&gt;</span><br><span class="line">    &lt;%= f.text_field :title %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    &lt;%= f.label :content %&gt;</span><br><span class="line">    &lt;%= f.text_area :content %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  &lt;%= f.submit &#x27;submit&#x27; %&gt;</span><br><span class="line">&lt;% end %&gt;</span><br></pre></td></tr></table></figure>
 <p>html 產出：</p>
