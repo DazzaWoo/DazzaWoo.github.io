@@ -183,7 +183,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-08-14 07:21:29 / 修改時間：09:43:07" itemprop="dateCreated datePublished" datetime="2022-08-14T07:21:29+08:00">2022-08-14</time>
+              <time title="創建時間：2022-08-14 07:21:29 / 修改時間：10:09:19" itemprop="dateCreated datePublished" datetime="2022-08-14T07:21:29+08:00">2022-08-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,50 +209,14 @@
           <h1 id="Rails-Active-Record-Association"><a href="#Rails-Active-Record-Association" class="headerlink" title="Rails Active Record Association"></a>Rails Active Record Association</h1><h2 id="Model-之間的關聯性"><a href="#Model-之間的關聯性" class="headerlink" title="Model 之間的關聯性"></a>Model 之間的關聯性</h2><p>在資料庫的設計中，通常會有需多不同的表單去存放不同的資料，以電商來說，會有賣家、商品、使用者、訂單等等這些資訊。而透過 Model 之間的關聯性，能更輕鬆地去對資料庫中的表格進行操作。</p>
 <p>在 Rails 中就包含一對一、一對多及多對多這些關聯。以下為實作一對一的關聯性。</p>
 <p>一對一關聯: 假設今天有使用網站的使用者在網站中只能擁有一間商店，除此之外，同一位使用者再重複建立商店。</p>
-<!-- more  -->
-
-<p><img src="https://i.imgur.com/Lk31v8k.png"></p>
-<p>需求：每一個 User 只擁有一間 Store。</p>
-<ol>
-<li><p>首先建立兩個 model 分別為 User 和 Store，並建立兩者間的關聯性。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rails g devise User name</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">rails g Store title belongs_to:user</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># user.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  <span class="comment"># Include default devise modules. Others available are:</span></span><br><span class="line">  <span class="comment"># :confirmable, :lockable, :timeoutable, :trackable and :omniauthable</span></span><br><span class="line">  devise <span class="symbol">:database_authenticatable</span>, <span class="symbol">:registerable</span>,</span><br><span class="line">         <span class="symbol">:recoverable</span>, <span class="symbol">:rememberable</span>, <span class="symbol">:validatable</span></span><br><span class="line">  has_one <span class="symbol">:store</span>        </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># store.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Store</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接著從使用者角度建立商店。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">u1 = User.create(email: <span class="string">&#x27;aa@aa.aa&#x27;</span>, password: <span class="string">&#x27;aa@aa.aa&#x27;</span>)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">u1.create_store(title: <span class="string">&#x27;s1&#x27;</span>)</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li>檢視 u1 的 store<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">u1.store</span></span><br><span class="line"></span><br><span class="line">&lt;Store:0x0000000106fe6e90                                       </span><br><span class="line"> id: 1,                                                          </span><br><span class="line"> title: &quot;s1&quot;,                                                    </span><br><span class="line"> address: nil,                                                   </span><br><span class="line"> phone: nil,                                                     </span><br><span class="line"> user_id: 1,                                                     </span><br><span class="line"> created_at: Sun, 07 Aug 2022 13:29:08.346090000 UTC +00:00,     </span><br><span class="line"> updated_at: Sun, 07 Aug 2022 13:29:08.346090000 UTC +00:00&gt;    </span><br></pre></td></tr></table></figure></li>
-<li>檢視所有 store<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">Store.all</span></span><br><span class="line"></span><br><span class="line">&lt;Store:0x0000000106d88d10                                   </span><br><span class="line">  id: 1,                                                      </span><br><span class="line">  title: &quot;s1&quot;,                                               </span><br><span class="line">  address: nil,                                              </span><br><span class="line">  phone: nil,                                                </span><br><span class="line">  user_id: 1,                                                </span><br><span class="line">  created_at: Sun, 07 Aug 2022 13:29:08.346090000 UTC +00:00,</span><br><span class="line">  updated_at: Sun, 07 Aug 2022 13:29:08.346090000 UTC +00:00&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="has-one-問題"><a href="#has-one-問題" class="headerlink" title="has_one 問題"></a>has_one 問題</h2><p>在一對一的關性性下，假如同一位使用者又再次建立另一間商店，按此關聯性應該會將前一筆資料覆蓋掉。</p>
-<ol start="3">
-<li>接著測試再一次從同一位使用者(u1)建立另一個商店。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ul.create_store(title: <span class="string">&#x27;s1-1&#x27;</span>)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: </span><br><span class="line">Failed to remove the existing associated store. The record failed to save after its foreign key was <span class="built_in">set</span> to nil.</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li><p>可以得知此時是建立失敗。</p>
-</li>
-<li><p>確認資料庫中 u1 的商店。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">u1.store</span></span><br><span class="line"></span><br><span class="line">&lt;Store:0x0000000106fe6e90                                       </span><br><span class="line"> id: 1,                                                          </span><br><span class="line"> title: &quot;s1&quot;,                                                    </span><br><span class="line"> address: nil,                                                   </span><br><span class="line"> phone: nil,                                                     </span><br><span class="line"> user_id: 1,                                                     </span><br><span class="line"> created_at: Sun, 07 Aug 2022 13:29:08.346090000 UTC +00:00,     </span><br><span class="line"> updated_at: Sun, 07 Aug 2022 13:29:08.346090000 UTC +00:00&gt;    </span><br></pre></td></tr></table></figure></li>
-<li><p>再確認資料庫中所有的商店。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">Store.all</span></span><br><span class="line"></span><br><span class="line">&lt;Store:0x0000000106d88d10                                   </span><br><span class="line">  id: 1,                                                      </span><br><span class="line">  title: &quot;s1&quot;,                                               </span><br><span class="line">  address: nil,                                              </span><br><span class="line">  phone: nil,                                                </span><br><span class="line">  user_id: 1&gt;  </span><br><span class="line">&lt;Store:0x0000000106d88d10                                   </span><br><span class="line">  id: 2,                                                      </span><br><span class="line">  title: &quot;s1-1&quot;,                                               </span><br><span class="line">  address: nil,                                              </span><br><span class="line">  phone: nil,                                                </span><br><span class="line">  user_id: 1&gt;  </span><br></pre></td></tr></table></figure></li>
-<li><p>在檢查所有商店時預期應該只有一間商店，但卻顯示兩間，user_id 都為同一個 User。</p>
-</li>
-<li><p>之後又重複兩次一樣的方式新增 Store。</p>
-</li>
-<li><p>資料庫訊息<br><img src="https://i.imgur.com/cnBuy9m.png"></p>
-</li>
-</ul>
-<p><strong>Q：請問即便關聯性是 has_one，為什麼從同一個使用者的角度去建立商店時，雖然建立失敗，但還是會寫入資料庫呢？</strong></p>
-<p><strong>A: 新版本Rails對於 has_one 的關連，如果原本 A -&gt; “Adidas”，要改成 A -&gt; “Nike”，Rails 會自動把原本對到的”Adidas”的 belongs_to 設定成 nil，但這個設定成 nil 的動作失敗了。所以原先的資料沒有被改變，但第二次的資料還是寫入資料庫。</strong> </p>
-<h2 id="解決辦法"><a href="#解決辦法" class="headerlink" title="解決辦法"></a>解決辦法</h2><ul>
-<li>確保在建立新的資料前已經移除舊的關聯。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># user.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  <span class="comment"># Include default devise modules. Others available are:</span></span><br><span class="line">  <span class="comment"># :confirmable, :lockable, :timeoutable, :trackable and :omniauthable</span></span><br><span class="line">  devise <span class="symbol">:database_authenticatable</span>, <span class="symbol">:registerable</span>,</span><br><span class="line">         <span class="symbol">:recoverable</span>, <span class="symbol">:rememberable</span>, <span class="symbol">:validatable</span></span><br><span class="line">  has_one <span class="symbol">:store</span>, <span class="symbol">dependent:</span> <span class="symbol">:destroy</span>        </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># store.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Store</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-透過此方式可以改寫原先的資料，覆蓋掉舊的資料。</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/14/Rails-%E4%B8%80%E5%B0%8D%E4%B8%80%E9%97%9C%E8%81%AF%E6%80%A7/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -449,16 +413,12 @@
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">分類</span></a>
+        <span class="site-state-item-name">分類</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">標籤</span></a>
+        <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
 </div>
