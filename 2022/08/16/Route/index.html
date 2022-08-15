@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"dazzawoo.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什麼是 Route?Route 在 Rails 的架構下是整個網站的路徑對照表，就好比一個社區的管理員，當你到朋友家的社區拜訪時，此時管理員都會詢問你要找哪位，並引導你到正確的位置。而 Route 的路徑位置是符合 RESTful 設計。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Route">
+<meta property="og:url" content="http://dazzawoo.github.io/2022/08/16/Route/index.html">
+<meta property="og:site_name" content="Daz&#39;s Tech blog">
+<meta property="og:description" content="什麼是 Route?Route 在 Rails 的架構下是整個網站的路徑對照表，就好比一個社區的管理員，當你到朋友家的社區拜訪時，此時管理員都會詢問你要找哪位，並引導你到正確的位置。而 Route 的路徑位置是符合 RESTful 設計。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-08-15T16:34:24.000Z">
+<meta property="article:modified_time" content="2022-08-15T16:38:54.660Z">
+<meta property="article:author" content="Daz">
+<meta property="article:tag" content="Rails">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://dazzawoo.github.io/2022/08/16/Route/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Route | Daz's Tech blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Daz's Tech blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hope on, Journey on</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://dazzawoo.github.io/2022/08/16/Route/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.imgur.com/jgVAJFq.jpg">
+      <meta itemprop="name" content="Daz">
+      <meta itemprop="description" content="Hello Tech World">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Daz's Tech blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Route
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-08-16 00:34:24 / 修改時間：00:38:54" itemprop="dateCreated datePublished" datetime="2022-08-16T00:34:24+08:00">2022-08-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Rails/" itemprop="url" rel="index"><span itemprop="name">Rails</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什麼是-Route"><a href="#什麼是-Route" class="headerlink" title="什麼是 Route?"></a>什麼是 Route?</h2><p>Route 在 Rails 的架構下是整個網站的路徑對照表，就好比一個社區的管理員，當你到朋友家的社區拜訪時，此時管理員都會詢問你要找哪位，並引導你到正確的位置。而 Route 的路徑位置是符合 RESTful 設計。</p>
+<span id="more"></span>
+
+<h2 id="什麼是-REST"><a href="#什麼是-REST" class="headerlink" title="什麼是 REST?"></a>什麼是 REST?</h2><p>REST(Representational State Transfer 表現層狀態轉換)是一種全球資訊網軟體架構風格，目的是讓各式不同的軟體或程式在網路上能更便利的傳送資料。將每一個網址視為一個資源（resource），讓使用者透過URL存取。而每個資源也會對應到不同的HTTP動作。</p>
+<h2 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h2><p>接著來看看根據 RESTful 設計出的網址：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># routes.rb</span></span><br><span class="line">Rails.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:books</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在 routes.rb 輸入 <code>resoureces :books</code>， Rails 會幫我們長出 8 條路徑並且對應到 Controller 7 個方法。</p>
+<p>終端機輸入 <code>rails routes</code> 查看路徑。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Prefix Verb   URI Pattern               Controller<span class="comment">#Action</span></span><br><span class="line">    books GET    /books(.:format)          books<span class="comment">#index</span></span><br><span class="line">          POST   /books(.:format)          books<span class="comment">#create</span></span><br><span class="line"> new_book GET    /books/new(.:format)      books<span class="comment">#new</span></span><br><span class="line">edit_book GET    /books/:<span class="built_in">id</span>/edit(.:format) books<span class="comment">#edit</span></span><br><span class="line">     book GET    /books/:<span class="built_in">id</span>(.:format)      books<span class="comment">#show</span></span><br><span class="line">          PATCH  /books/:<span class="built_in">id</span>(.:format)      books<span class="comment">#update</span></span><br><span class="line">          PUT    /books/:<span class="built_in">id</span>(.:format)      books<span class="comment">#update</span></span><br><span class="line">          DELETE /books/:<span class="built_in">id</span>(.:format)      books<span class="comment">#destroy</span></span><br></pre></td></tr></table></figure>
+<p>7 個方法分別為：</p>
+<ul>
+<li>index: 書籍列表</li>
+<li>create: 新增書籍</li>
+<li>new: 新增書籍頁面</li>
+<li>edit: 編輯書籍頁面</li>
+<li>show: 檢視單一書籍</li>
+<li>update: 更新書籍</li>
+<li>destroy: 刪除書籍</li>
+</ul>
+<h3 id="假如-Resources-改為單數或後方為單數呢？"><a href="#假如-Resources-改為單數或後方為單數呢？" class="headerlink" title="假如 Resources 改為單數或後方為單數呢？"></a>假如 Resources 改為單數或後方為單數呢？</h3><figure class="highlight plaintext"><figcaption><span>:book```: resources 後方為單數，對應的 Controller 為單數(book)。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```bash</span><br><span class="line">Prefix Verb   URI Pattern              Controller#Action</span><br><span class="line">book_index GET    /book(.:format)          book#index</span><br><span class="line">           POST   /book(.:format)          book#create</span><br><span class="line">  new_book GET    /book/new(.:format)      book#new</span><br><span class="line"> edit_book GET    /book/:id/edit(.:format) book#edit</span><br><span class="line">      book GET    /book/:id(.:format)      book#show</span><br><span class="line">           PATCH  /book/:id(.:format)      book#update</span><br><span class="line">           PUT    /book/:id(.:format)      book#update</span><br><span class="line">           DELETE /book/:id(.:format)      book#destroy</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><figcaption><span>:book```: resource(單數) 後方為單數，對應的 Controller 為複數(books)。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">```bash=</span><br><span class="line">Prefix Verb   URI Pattern          Controller#Action</span><br><span class="line"> new_book GET    /book/new(.:format)  books#new</span><br><span class="line">edit_book GET    /book/edit(.:format) books#edit</span><br><span class="line">     book GET    /book(.:format)      books#show</span><br><span class="line">          PATCH  /book(.:format)      books#update</span><br><span class="line">          PUT    /book(.:format)      books#update</span><br><span class="line">          DELETE /book(.:format)      books#destroy</span><br><span class="line">          POST   /book(.:format)      books#create</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>:books```: resource(單數) 後方為單數，對應的 Controller 為複數(books)。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">```bash=</span><br><span class="line">Prefix Verb   URI Pattern           Controller#Action</span><br><span class="line"> new_books GET    /books/new(.:format)  books#new</span><br><span class="line">edit_books GET    /books/edit(.:format) books#edit</span><br><span class="line">     books GET    /books(.:format)      books#show</span><br><span class="line">           PATCH  /books(.:format)      books#update</span><br><span class="line">           PUT    /books(.:format)      books#update</span><br><span class="line">           DELETE /books(.:format)      books#destroy</span><br><span class="line">           POST   /books(.:format)      books#create</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當 resource 為單數時，沒有 id, 也沒有 index 方法。</li>
+</ul>
+<h3 id="不需要這麼多方法時"><a href="#不需要這麼多方法時" class="headerlink" title="不需要這麼多方法時"></a>不需要這麼多方法時</h3><p>可以加上 only 或 except 選出需要使用到的方法。</p>
+<ul>
+<li>only: 需要的方法。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># routes.rb</span></span><br><span class="line">resources <span class="symbol">:books</span>, <span class="symbol">only:</span> [<span class="symbol">:index</span>, <span class="symbol">:show</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">books GET  /books(.:format)     books<span class="comment">#index</span></span><br><span class="line"> book GET  /books/:<span class="built_in">id</span>(.:format) books<span class="comment">#show</span></span><br></pre></td></tr></table></figure>
+相反為：</li>
+<li>except: 除了這些方法以外都需要。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:books</span>, <span class="symbol">except:</span> [<span class="symbol">:new</span>, <span class="symbol">:create</span>, <span class="symbol">:edit</span>, <span class="symbol">:update</span>, <span class="symbol">:destroy</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">books GET  /books(.:format)     books<span class="comment">#index</span></span><br><span class="line"> book GET  /books/:<span class="built_in">id</span>(.:format) books<span class="comment">#show</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="網址設定及轉址"><a href="#網址設定及轉址" class="headerlink" title="網址設定及轉址"></a>網址設定及轉址</h3><p>除了 RESTful 設計下的網址外也可直接設定網址或說明要去的網址。</p>
+<ul>
+<li>網址設定：<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">get <span class="string">&quot;/&quot;</span>, <span class="symbol">to:</span> <span class="string">&quot;home#index&quot;</span></span><br><span class="line"></span><br><span class="line">root <span class="symbol">to:</span> <span class="string">&quot;home#index&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>轉址:<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get <span class="string">&#x27;/home&#x27;</span>, <span class="symbol">to:</span> redirect(<span class="string">&#x27;/&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="當-Resource-網址不夠用時"><a href="#當-Resource-網址不夠用時" class="headerlink" title="當 Resource 網址不夠用時"></a>當 Resource 網址不夠用時</h3><ol>
+<li>在 resource 裡用 get 的方式新增。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">    get <span class="symbol">:unlock</span></span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> Prefix Verb   URI Pattern                      Controller<span class="comment">#Action</span></span><br><span class="line">book_unlock GET    /books/:book_id/unlock(.:format) books<span class="comment">#unlock</span></span><br><span class="line">      books GET    /books(.:format)                 books<span class="comment">#index</span></span><br><span class="line">            POST   /books(.:format)                 books<span class="comment">#create</span></span><br><span class="line">   new_book GET    /books/new(.:format)             books<span class="comment">#new</span></span><br><span class="line">  edit_book GET    /books/:<span class="built_in">id</span>/edit(.:format)        books<span class="comment">#edit</span></span><br><span class="line">       book GET    /books/:<span class="built_in">id</span>(.:format)             books<span class="comment">#show</span></span><br><span class="line">            PATCH  /books/:<span class="built_in">id</span>(.:format)             books<span class="comment">#update</span></span><br><span class="line">            PUT    /books/:<span class="built_in">id</span>(.:format)             books<span class="comment">#update</span></span><br><span class="line">            DELETE /books/:<span class="built_in">id</span>(.:format)             books<span class="comment">#destroy</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>resources 為複數時，新增的路徑會 + 上 _id。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">    get <span class="symbol">:unlock</span></span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> Prefix Verb   URI Pattern             Controller<span class="comment">#Action</span></span><br><span class="line">unlock_books GET    /books/unlock(.:format) books<span class="comment">#unlock</span></span><br><span class="line">   new_books GET    /books/new(.:format)    books<span class="comment">#new</span></span><br><span class="line">  edit_books GET    /books/edit(.:format)   books<span class="comment">#edit</span></span><br><span class="line">       books GET    /books(.:format)        books<span class="comment">#show</span></span><br><span class="line">             PATCH  /books(.:format)        books<span class="comment">#update</span></span><br><span class="line">             PUT    /books(.:format)        books<span class="comment">#update</span></span><br><span class="line">             DELETE /books(.:format)        books<span class="comment">#destroy</span></span><br><span class="line">             POST   /books(.:format)        books<span class="comment">#create</span></span><br></pre></td></tr></table></figure></li>
+<li>resources 為單數時，新增的路徑則沒有 id。</li>
+</ul>
+<ol start="2">
+<li>透過 member 或 collection 增加方法。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">  member <span class="keyword">do</span></span><br><span class="line">    patch <span class="symbol">:unlock</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Prefix Verb   URI Pattern                 Controller<span class="comment">#Action</span></span><br><span class="line">unlock_book PATCH  /books/:<span class="built_in">id</span>/unlock(.:format) books<span class="comment">#unlock</span></span><br><span class="line">      books GET    /books(.:format)            books<span class="comment">#index</span></span><br><span class="line">            POST   /books(.:format)            books<span class="comment">#create</span></span><br><span class="line">   new_book GET    /books/new(.:format)        books<span class="comment">#new</span></span><br><span class="line">  edit_book GET    /books/:<span class="built_in">id</span>/edit(.:format)   books<span class="comment">#edit</span></span><br><span class="line">       book GET    /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#show</span></span><br><span class="line">            PATCH  /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#update</span></span><br><span class="line">            PUT    /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#update</span></span><br><span class="line">            DELETE /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#destroy</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>用 member 增加方法路徑需要帶入 id 。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">  collection <span class="keyword">do</span></span><br><span class="line">    patch <span class="symbol">:unlock</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> Prefix Verb   URI Pattern                 Controller<span class="comment">#Action</span></span><br><span class="line">unlock_book PATCH  /books/:<span class="built_in">id</span>/unlock(.:format) books<span class="comment">#unlock</span></span><br><span class="line">      books GET    /books(.:format)            books<span class="comment">#index</span></span><br><span class="line">            POST   /books(.:format)            books<span class="comment">#create</span></span><br><span class="line">   new_book GET    /books/new(.:format)        books<span class="comment">#new</span></span><br><span class="line">  edit_book GET    /books/:<span class="built_in">id</span>/edit(.:format)   books<span class="comment">#edit</span></span><br><span class="line">       book GET    /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#show</span></span><br><span class="line">            PATCH  /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#update</span></span><br><span class="line">            PUT    /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#update</span></span><br><span class="line">            DELETE /books/:<span class="built_in">id</span>(.:format)        books<span class="comment">#destroy</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>用 member 增加方法路徑不需要 id 。</li>
+</ul>
+<h3 id="假如要在原有的-resource-路徑的前方再加上-x2F-admin"><a href="#假如要在原有的-resource-路徑的前方再加上-x2F-admin" class="headerlink" title="假如要在原有的 resource 路徑的前方再加上 &#x2F;admin"></a>假如要在原有的 resource 路徑的前方再加上 &#x2F;admin</h3><ol>
+<li><p>namespace 用法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">namespace <span class="symbol">:admin</span> <span class="keyword">do</span></span><br><span class="line">  resource <span class="symbol">:books</span> <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Prefix Verb   URI Pattern                 Controller#Action</span><br><span class="line"> new_admin_books GET    /admin/books/new(.:format)  admin/books#new</span><br><span class="line">edit_admin_books GET    /admin/books/edit(.:format) admin/books#edit</span><br><span class="line">     admin_books GET    /admin/books(.:format)      admin/books#show</span><br><span class="line">                 PATCH  /admin/books(.:format)      admin/books#update</span><br><span class="line">                 PUT    /admin/books(.:format)      admin/books#update</span><br><span class="line">                 DELETE /admin/books(.:format)      admin/books#destroy</span><br><span class="line">                 POST   /admin/books(.:format)      admin/books#create</span><br></pre></td></tr></table></figure>
+<p>此種作法會改變原先的 prefix，使用 View Helper 時會有影響，而且對應的 Controller (admin&#x2F;books)也不一樣了。</p>
+</li>
+<li><p>shallow 用法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="symbol">:admin</span> <span class="keyword">do</span></span><br><span class="line">  resource <span class="symbol">:books</span>, <span class="symbol">shallow:</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Prefix Verb   URI Pattern                 Controller<span class="comment">#Action</span></span><br><span class="line"> new_admin_books GET    /admin/books/new(.:format)  books<span class="comment">#new</span></span><br><span class="line">edit_admin_books GET    /admin/books/edit(.:format) books<span class="comment">#edit</span></span><br><span class="line">     admin_books GET    /admin/books(.:format)      books<span class="comment">#show</span></span><br><span class="line">                 PATCH  /admin/books(.:format)      books<span class="comment">#update</span></span><br><span class="line">                 PUT    /admin/books(.:format)      books<span class="comment">#update</span></span><br><span class="line">                 DELETE /admin/books(.:format)      books<span class="comment">#destroy</span></span><br><span class="line">                 POST   /admin/books(.:format)      books<span class="comment">#create</span></span><br></pre></td></tr></table></figure>
+<p>shallow 用法一樣會改變 prefix，但是對應的 Controller (books)不變。</p>
+</li>
+<li><p>scope 用法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scope <span class="symbol">:admin</span> <span class="keyword">do</span></span><br><span class="line">  resource <span class="symbol">:books</span>, <span class="symbol">shallow:</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Prefix Verb   URI Pattern                 Controller<span class="comment">#Action</span></span><br><span class="line"> new_books GET    /admin/books/new(.:format)  books<span class="comment">#new</span></span><br><span class="line">edit_books GET    /admin/books/edit(.:format) books<span class="comment">#edit</span></span><br><span class="line">     books GET    /admin/books(.:format)      books<span class="comment">#show</span></span><br><span class="line">           PATCH  /admin/books(.:format)      books<span class="comment">#update</span></span><br><span class="line">           PUT    /admin/books(.:format)      books<span class="comment">#update</span></span><br><span class="line">           DELETE /admin/books(.:format)      books<span class="comment">#destroy</span></span><br><span class="line">           POST   /admin/books(.:format)      books<span class="comment">#create</span></span><br></pre></td></tr></table></figure>
+<p>scope 用法不會改變 prefix 和 Controller。</p>
+</li>
+</ol>
+<p>參考來源：<a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/11-routes">為你自己學 Ruby on Rails</a>、<a target="_blank" rel="noopener" href="https://cindyliu923.medium.com/%E4%BB%80%E9%BA%BC%E6%98%AF-rest-restful-7667b3054371">什麼是 REST? RESTful?</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Rails/" rel="tag"># Rails</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/15/find%E3%80%81find-by%E3%80%81where/" rel="prev" title="find、find_by、where">
+      <i class="fa fa-chevron-left"></i> find、find_by、where
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Route"><span class="nav-number">1.</span> <span class="nav-text">什麼是 Route?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-REST"><span class="nav-number">2.</span> <span class="nav-text">什麼是 REST?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resource"><span class="nav-number">3.</span> <span class="nav-text">Resource</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E5%A6%82-Resources-%E6%94%B9%E7%82%BA%E5%96%AE%E6%95%B8%E6%88%96%E5%BE%8C%E6%96%B9%E7%82%BA%E5%96%AE%E6%95%B8%E5%91%A2%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">假如 Resources 改為單數或後方為單數呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%A6%81%E9%80%99%E9%BA%BC%E5%A4%9A%E6%96%B9%E6%B3%95%E6%99%82"><span class="nav-number">3.2.</span> <span class="nav-text">不需要這麼多方法時</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%B2%E5%9D%80%E8%A8%AD%E5%AE%9A%E5%8F%8A%E8%BD%89%E5%9D%80"><span class="nav-number">3.3.</span> <span class="nav-text">網址設定及轉址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%95%B6-Resource-%E7%B6%B2%E5%9D%80%E4%B8%8D%E5%A4%A0%E7%94%A8%E6%99%82"><span class="nav-number">3.4.</span> <span class="nav-text">當 Resource 網址不夠用時</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E5%A6%82%E8%A6%81%E5%9C%A8%E5%8E%9F%E6%9C%89%E7%9A%84-resource-%E8%B7%AF%E5%BE%91%E7%9A%84%E5%89%8D%E6%96%B9%E5%86%8D%E5%8A%A0%E4%B8%8A-x2F-admin"><span class="nav-number">3.5.</span> <span class="nav-text">假如要在原有的 resource 路徑的前方再加上 &#x2F;admin</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Daz"
+      src="https://i.imgur.com/jgVAJFq.jpg">
+  <p class="site-author-name" itemprop="name">Daz</p>
+  <div class="site-description" itemprop="description">Hello Tech World</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DazzaWoo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;DazzaWoo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Daza_Wu" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Daza_Wu" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a href='https://DazzaWoo.github.io'>Daz</a></span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
